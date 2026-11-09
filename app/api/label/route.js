@@ -16,11 +16,15 @@ Return ONLY JSON: {"labels":[[ids for review 0],[ids for review 1],...]} with ex
 
 Reviews:
 ${list}`;
-  const model = process.env.GEMINI_MODEL || 'gemini-2.5-flash';
-  const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${key}`, {
-    method: 'POST', headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ contents: [{ role: 'user', parts: [{ text: prompt }] }], generationConfig: { temperature: 0, responseMimeType: 'application/json' } })
-  });
+  const models = [process.env.GEMINI_MODEL, 'gemini-flash-latest', 'gemini-2.5-flash', 'gemini-2.0-flash'].filter(Boolean);
+  let r;
+  for (const model of models) {
+    r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${key}`, {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ contents: [{ role: 'user', parts: [{ text: prompt }] }], generationConfig: { temperature: 0, responseMimeType: 'application/json' } })
+    });
+    if (r.status !== 404) break;
+  }
   if (!r.ok) return NextResponse.json({ error: 'Gemini returned ' + r.status }, { status: 502 });
   const j = await r.json();
   try {
