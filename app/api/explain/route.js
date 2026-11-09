@@ -7,16 +7,16 @@ import { buildPrompt } from '../../../lib/prompt.js';
 async function callGemini(prompt) {
   const key = process.env.GEMINI_API_KEY;
   if (!key) throw new Error('no_key');
-  const models = [process.env.GEMINI_MODEL, 'gemini-2.5-flash', 'gemini-flash-latest', 'gemini-2.5-flash-lite', 'gemini-2.0-flash'].filter(Boolean);
+  const models = [process.env.GEMINI_MODEL, 'gemini-flash-latest', 'gemini-3-flash', 'gemini-3-flash-preview'].filter(Boolean);
   const ctrl = new AbortController();
-  const timer = setTimeout(() => ctrl.abort(), 25000);
+  const timer = setTimeout(() => ctrl.abort(), 40000);
   try {
     let r;
     for (const model of models) {
       r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'x-goog-api-key': key },
-        signal: AbortSignal.any([ctrl.signal, AbortSignal.timeout(7000)]),
+        signal: AbortSignal.any([ctrl.signal, AbortSignal.timeout(15000)]),
         body: JSON.stringify({
           contents: [{ role: 'user', parts: [{ text: prompt }] }],
           generationConfig: { temperature: 0.3, responseMimeType: 'application/json', thinkingConfig: { thinkingBudget: 0 } }
