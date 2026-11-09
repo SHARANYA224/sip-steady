@@ -11,6 +11,7 @@ header.top { display: flex; justify-content: space-between; align-items: baselin
 .brand { font: 600 26px var(--display); }
 .brand small { font: 500 14px var(--body); color: var(--muted); margin-left: 8px; }
 nav a { color: var(--accent); font-size: 15px; margin-left: 14px; }
+.row .go { margin-top: 0; }
 h1 { font: 600 clamp(26px, 4vw, 36px)/1.15 var(--display); margin: 22px 0 8px; text-wrap: balance; }
 .lede { color: var(--muted); max-width: 62ch; margin: 0 0 22px; }
 .grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 20px; }
