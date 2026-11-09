@@ -13,9 +13,9 @@ async function callGemini(prompt) {
   try {
     let r;
     for (const model of models) {
-      r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${key}`, {
+      r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', 'x-goog-api-key': key },
         signal: AbortSignal.any([ctrl.signal, AbortSignal.timeout(7000)]),
         body: JSON.stringify({
           contents: [{ role: 'user', parts: [{ text: prompt }] }],
