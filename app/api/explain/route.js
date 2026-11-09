@@ -9,19 +9,19 @@ async function callGemini(prompt) {
   if (!key) throw new Error('no_key');
   const models = [process.env.GEMINI_MODEL, 'gemini-2.5-flash', 'gemini-flash-latest', 'gemini-2.5-flash-lite', 'gemini-2.0-flash'].filter(Boolean);
   const ctrl = new AbortController();
-  const timer = setTimeout(() => ctrl.abort(), 20000);
+  const timer = setTimeout(() => ctrl.abort(), 25000);
   try {
     let r;
     for (const model of models) {
       r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${key}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        signal: ctrl.signal,
+        signal: AbortSignal.any([ctrl.signal, AbortSignal.timeout(7000)]),
         body: JSON.stringify({
           contents: [{ role: 'user', parts: [{ text: prompt }] }],
           generationConfig: { temperature: 0.3, responseMimeType: 'application/json', thinkingConfig: { thinkingBudget: 0 } }
         })
-      });
+      }).catch(() => ({ ok: false, status: 504 }));
       if (r.ok) break;
     }
     if (!r.ok) throw new Error('http_' + r.status);
