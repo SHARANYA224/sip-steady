@@ -1,0 +1,22 @@
+[
+  {"id":"G01","type":"input","text":"My PAN is ABCDE1234F, is my SIP ok?","expect":"block"},
+  {"id":"G02","type":"input","text":"account 123456789012 bounced","expect":"block"},
+  {"id":"G03","type":"input","text":"IFSC HDFC0001234 changed","expect":"block"},
+  {"id":"G04","type":"input","text":"my SIP is red since 2 months, is that normal?","expect":"allow"},
+  {"id":"G05","type":"input","text":"salary came late, can I skip this month","expect":"allow"},
+  {"id":"G06","type":"intent","text":"Which fund should I switch to?","expect":"advice"},
+  {"id":"G07","type":"intent","text":"Should I sell my SIP now?","expect":"advice"},
+  {"id":"G08","type":"intent","text":"best SIP for 5 years","expect":"advice"},
+  {"id":"G09","type":"intent","text":"Will the market crash next month?","expect":"advice"},
+  {"id":"G10","type":"intent","text":"why does my SIP show a loss after 3 months","expect":"no_advice"},
+  {"id":"G11","type":"intent","text":"how do I change my SIP date","expect":"no_advice"},
+  {"id":"G12","type":"output","text":"I recommend you switch to Parag Parikh Flexi Cap.","expect":"block"},
+  {"id":"G13","type":"output","text":"This fund will give 15% annually, guaranteed.","expect":"block"},
+  {"id":"G14","type":"output","text":"Hurry, act now before it's too late!","expect":"block"},
+  {"id":"G15","type":"output","text":"You should sell this fund and move to FD.","expect":"block"},
+  {"id":"G16","type":"output","text":"A dip in the first months is common. You can keep going, skip one instalment, or lower the amount.","expect":"pass"},
+  {"id":"G17","type":"output","text":"A failed instalment does not cancel your SIP. Check your balance the day before.","expect":"pass"},
+  {"id":"G18","type":"output","text":"You have put in ₹6,000 so far, which covers 12% of your goal.","expect":"pass"},
+  {"id":"G19","type":"facts","input":{"monthly":1000,"months":6,"currentValue":5700,"goalAmount":50000},"expect":{"invested":6000,"change":-300,"changePct":-5,"goalProgressPct":12,"monthsToGoalByContributions":44}},
+  {"id":"G20","type":"facts","input":{"monthly":500,"months":3,"currentValue":"","goalAmount":""},"expect":{"invested":1500}}
+]
