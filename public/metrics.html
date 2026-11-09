@@ -1,0 +1,44 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Metrics and Numbers Check: SIP Steady</title><style>body{margin:0;background:#f4f6fa;color:#1b2333;font:16px/1.55 Inter,system-ui,sans-serif}.w{max-width:960px;margin:0 auto;padding:28px 16px 60px}h1{font-size:28px;margin:0 0 4px}h2{font-size:19px;margin:26px 0 8px;color:#1a5fd0}.sub{color:#566074}a{color:#1a5fd0}table{width:100%;border-collapse:collapse;background:#fff;font-size:15px}th,td{border:1px solid #d8deea;padding:7px 9px;text-align:left;vertical-align:top}th{background:#e3ecfc}.tb{overflow-x:auto}.box{background:#fff;border:1px solid #d8deea;border-left:4px solid #1a5fd0;border-radius:8px;padding:12px 14px;margin:10px 0}code{background:#e3ecfc;padding:1px 5px;border-radius:4px;font-size:14px}</style></head><body><div class="w"><h1>Metrics, experiment and numbers check</h1><p class="sub"><a href="/">MVP</a> · <a href="/discovery.html">Discovery engine</a> · <a href="/evidence.html">AI Evidence Log</a> · <a href="/survey.html">Survey results</a> · <a href="/impact.html">RICE &amp; impact</a> · <a href="/metrics.html">Metrics &amp; numbers check</a></p>
+<p>Added 9 Nov 2026, after submission. This page shows the working behind the metrics slide and tests the deck's assumptions against published figures. The deck itself is unchanged; where published data differs, the deck's numbers turn out to be the conservative case.</p>
+
+<h2>1. Assumptions vs published figures</h2><div class="tb"><table><tr><th>Input</th><th>Deck (assumption)</th><th>Published figure</th><th>Source</th></tr>
+<tr><td>New SIP registrations per month (India)</td><td>50–60 lakh</td><td>63.26 lakh (Sep 2026); 66.40 lakh (Aug 2026)</td><td>AMFI monthly data, as reported by <a href="https://telanganatoday.com/sip-stoppage-ratio-falls-to-78-5pc-in-september-as-inflows-hit-record-high">Telangana Today</a></td></tr>
+<tr><td>Groww share of new SIP registrations</td><td>25%</td><td>43.6% (Jul–Sep 2026)</td><td>Company-reported figure via The Economic Times, as reported by <a href="https://lapaasvoice.com/groww-captures-44-of-new-sip-registrations-in-september-quarter/">Lapaas Voice</a>; not independently verified</td></tr>
+<tr><td>Is SIP churn an industry problem?</td><td>57% early pause/stop (our survey)</td><td>Industry stoppage ratio 78.5% (Sep 2026): 49.68 lakh SIPs discontinued or matured vs 63.26 lakh new</td><td>AMFI, as reported by <a href="https://telanganatoday.com/sip-stoppage-ratio-falls-to-78-5pc-in-september-as-inflows-hit-record-high">Telangana Today</a></td></tr></table></div>
+
+<h2>2. Impact recalculated with published inputs</h2><div class="tb"><table><tr><th>Step</th><th>Deck (conservative)</th><th>With published inputs</th></tr>
+<tr><td>New SIPs per month</td><td>50–60 lakh</td><td>63.26 lakh</td></tr>
+<tr><td>× Groww share</td><td>25%</td><td>43.6%</td></tr>
+<tr><td>× First-time investors (survey 36/46)</td><td>78%</td><td>78%</td></tr>
+<tr><td>× Early pause/stop (survey 26/46)</td><td>57%</td><td>57%</td></tr>
+<tr><td>= First-time Groww SIPs at risk per month</td><td>~6 lakh</td><td>~12.3 lakh</td></tr>
+<tr><td>× 10% converted × ₹1,000 × 12 months</td><td><b>~₹72 Cr</b></td><td><b>~₹147 Cr</b></td></tr></table></div>
+<p class="sub">We keep ₹72 Cr as the headline because the Groww share is company-reported and the two survey rates come from a convenience sample. The 10% conversion is still an assumption until the A/B test runs.</p>
+
+<h2>3. Metric tree (same as deck slide 8)</h2><div class="tb"><table><tr><th>Level</th><th>Metric</th><th>Definition</th><th>Baseline / target</th></tr>
+<tr><td>North Star</td><td>Month-12 active rate</td><td>% of first-time SIP investors with an active SIP at month 12</td><td>Survey proxy 61% still active (28/46)</td></tr>
+<tr><td>Product proxy</td><td>Stop-to-Soft-Choice Rate</td><td>% of cancel intents in months 1–3 where the user saw SIP Steady and chose keep, skip, pause or lower</td><td>Target +10 points in 2 cohorts</td></tr>
+<tr><td>L1</td><td>Explainer Open Rate</td><td>% of cancel intents where SIP Steady was opened</td><td>Shows it is seen at the moment that matters</td></tr>
+<tr><td>L2</td><td>Soft-Choice Rate</td><td>% of openers who pick skip, pause or lower</td><td>Choices understood and trusted</td></tr>
+<tr><td>L3</td><td>30-Day Survival</td><td>% of soft-choice users with an instalment in the next 30 days</td><td>A pause that never resumes is a delayed cancel</td></tr>
+<tr><td>L4</td><td>On-Track Confidence</td><td>% rating "I understand if my SIP is on track" 4–5</td><td>Now 24% (11/45); user test 2.75 → 4.0 average</td></tr>
+<tr><td>G1</td><td>Advice-Flag Rate</td><td>% of AI answers blocked or reported as advice</td><td>Must stay 0; eval gate 20/20</td></tr>
+<tr><td>G2</td><td>Fallback Rate</td><td>% of answers served by the vetted fallback</td><td>&lt; 10%</td></tr>
+<tr><td>G3</td><td>Healthy-Pause Check</td><td>Complaints, and % of cash-squeezed users nudged to keep the full amount</td><td>Lowering or pausing stays easy</td></tr></table></div>
+
+<h2>4. Experiment sample size</h2><div class="box">Two-sided test, 95% confidence, 80% power: <code>n per arm = (1.96·√(2p̄(1−p̄)) + 0.84·√(p₁(1−p₁)+p₂(1−p₂)))² ÷ (p₂−p₁)²</code></div>
+<div class="tb"><table><tr><th>What we want to detect</th><th>Baseline</th><th>Needed per arm</th></tr>
+<tr><td>5-point lift in Soft-Choice Rate</td><td>30%</td><td>~1,380</td></tr>
+<tr><td>5-point lift (worst case)</td><td>50%</td><td>~1,570</td></tr>
+<tr><td>2-point lift in month-12 active rate</td><td>61%</td><td>~9,250</td></tr></table></div>
+<p>The deck plans ~10,000 cancel intents per arm. That is well above the ~1,600 needed for the 5-point lift, which leaves room to read results by segment (salaried vs stipend, cash vs returns trigger) and to detect a change as small as 2 points in the month-12 North Star.</p>
+
+<h2>5. How sure are the survey numbers?</h2><p>95% confidence intervals (Wilson) for the clean sample. With n = 46 the ranges are wide, so we use the survey for direction and size the experiment to confirm.</p><div class="tb"><table><tr><th>Finding</th><th>Result</th><th>95% range</th></tr>
+<tr><td>First pause/stop within 3 months</td><td>57% (26/46)</td><td>42–70%</td></tr>
+<tr><td>Money tight that month</td><td>48% (22/46)</td><td>34–62%</td></tr>
+<tr><td>Returns lower than expected</td><td>43% (20/46)</td><td>30–58%</td></tr>
+<tr><td>Can't tell if on track (1–2 of 5)</td><td>56% (25/45)</td><td>41–69%</td></tr>
+<tr><td>Turn to YouTube when unsure</td><td>50% (23/46)</td><td>36–64%</td></tr>
+<tr><td>First-time investors</td><td>78% (36/46)</td><td>64–88%</td></tr></table></div>
+<p class="sub">Even at the low end of each range, early stopping (42%) and the two triggers (34%, 30%) remain the largest problems, so the choice of solution holds. The 4-person user test (2.75 → 4.0) is an early signal, not a statistical result.</p>
+</div></body></html>
