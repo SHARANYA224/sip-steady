@@ -19,8 +19,8 @@ ${list}`;
   const models = [process.env.GEMINI_MODEL, 'gemini-2.5-flash', 'gemini-flash-latest', 'gemini-2.5-flash-lite', 'gemini-2.0-flash'].filter(Boolean);
   let r; const tried = [];
   for (const model of models) {
-    try { r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${key}`, {
-      method: 'POST', headers: { 'Content-Type': 'application/json' }, signal: AbortSignal.timeout(14000),
+    try { r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`, {
+      method: 'POST', headers: { 'Content-Type': 'application/json', 'x-goog-api-key': key }, signal: AbortSignal.timeout(14000),
       body: JSON.stringify({ contents: [{ role: 'user', parts: [{ text: prompt }] }], generationConfig: { temperature: 0, responseMimeType: 'application/json', thinkingConfig: { thinkingBudget: 0 } } })
     }); } catch (e) { tried.push(model + ':timeout'); r = { ok: false, status: 504 }; continue; }
     if (r.ok) break;
