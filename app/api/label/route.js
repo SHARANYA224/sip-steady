@@ -17,15 +17,16 @@ Return ONLY JSON: {"labels":[[ids for review 0],[ids for review 1],...]} with ex
 Reviews:
 ${list}`;
   const models = [process.env.GEMINI_MODEL, 'gemini-2.5-flash', 'gemini-flash-latest', 'gemini-2.5-flash-lite', 'gemini-2.0-flash'].filter(Boolean);
-  let r;
+  let r; const tried = [];
   for (const model of models) {
     try { r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${key}`, {
       method: 'POST', headers: { 'Content-Type': 'application/json' }, signal: AbortSignal.timeout(14000),
       body: JSON.stringify({ contents: [{ role: 'user', parts: [{ text: prompt }] }], generationConfig: { temperature: 0, responseMimeType: 'application/json', thinkingConfig: { thinkingBudget: 0 } } })
-    }); } catch { r = { ok: false, status: 504 }; continue; }
+    }); } catch (e) { tried.push(model + ':timeout'); r = { ok: false, status: 504 }; continue; }
     if (r.ok) break;
+    tried.push(model + ':' + r.status + ':' + (await r.text()).slice(0, 150));
   }
-  if (!r.ok) return NextResponse.json({ error: 'Gemini returned ' + r.status }, { status: 502 });
+  if (!r.ok) return NextResponse.json({ error: 'Gemini returned ' + r.status, tried }, { status: 502 });
   const j = await r.json();
   try {
     const out = JSON.parse(j.candidates[0].content.parts.map((p) => p.text).join(''));
